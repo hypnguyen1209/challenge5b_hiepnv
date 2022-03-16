@@ -1,0 +1,58 @@
+version: '3'
+
+networks:
+ default:
+
+services:
+ nginx:
+  image: 'nginx:alpine'
+  container_name: 'nginx_${APP_NAME}'
+  ports:
+   - '${APP_PORT}:80'
+  volumes:
+   - './backend/src:/var/www/html'
+   - './nginx_default.conf:/etc/nginx/conf.d/default.conf'
+  depends_on:
+   - php
+   - mysql
+   - web
+  networks:
+   - default
+
+ mysql:
+  image: 'mysql:5.7'
+  volumes:
+   - ./backend/db_data:/var/lib/mysql
+  container_name: 'mysql_${APP_NAME}'
+  restart: always
+  ports:
+   - '3307:3306'
+  environment:
+   MYSQL_DATABASE: 'challenge5b'
+   MYSQL_USER: user
+   MYSQL_PASSWORD: 6789@hackcaibiu
+   MYSQL_ROOT_PASSWORD: hackcaibiu@9876
+  networks:
+   - default
+
+ php:
+  build:
+   context: ./backend
+   dockerfile: Dockerfile
+  container_name: 'php_${APP_NAME}'
+  ports:
+   - '9003:9000'
+  networks:
+   - default
+  volumes:
+   - './backend/src:/var/www/html'
+
+ web:
+  build:
+   context: ./frontend
+   dockerfile: Dockerfile
+  container_name: 'web_${APP_NAME}'
+  ports:
+   - '8080:8080'
+  networks:
+   - default
