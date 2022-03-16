@@ -1,11 +1,12 @@
 # challenge5b_hiepnv
 
 Backend: Laravel
+
 Frontend: Vue 3 + Pinia
+
 ## Yêu cầu:
 
-Lập trình bằng framework Laravel, sử dụng DB MySQL để xây dựng
-website quản lý thông tin sinh viên, tài liệu của 1 lớp học.
+Lập trình bằng framework Laravel, sử dụng DB MySQL để xây dựng website quản lý thông tin sinh viên, tài liệu của 1 lớp học.
 
 ### Yêu cầu ứng dụng:
 
@@ -62,5 +63,8 @@ docker exec -it php_challenge5b
 > php artisan config:cache
 ```
 
+### Import file `challenge5b-hiepnv.sql` vào MySQL
+
 Done.
+
 Mở trình duyệt với địa chỉ. http://\<ip\>:110000
